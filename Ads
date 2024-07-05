@@ -1,0 +1,50 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local tps = Instance.new("ImageButton")
+local chosenimage = 18252095446
+local transparentbg = true
+--Properties:
+if transparentbg == true then
+	tps.BackgroundTransparency = 1
+else
+	tps.BackgroundTransparency = 0
+end
+tps.Name = "tps"
+tps.Parent = ScreenGui
+tps.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+tps.BorderColor3 = Color3.fromRGB(0, 0, 0)
+tps.BorderSizePixel = 0
+tps.Position = UDim2.new(0.902, 0, 0, 0)
+tps.Size = UDim2.new(0, 160, 0, 1038)
+tps.Image = "rbxassetid://"..chosenimage
+game.Players.PlayerAdded:Connect(function(plr)
+	ScreenGui.Parent = plr.PlayerGui
+	while wait(math.random(15,30)) do
+		tps.Visible = true
+		wait(1.5)
+		if tps.Visible == true then
+			tps.Visible = false
+		end
+	end
+end)
+-- Scripts:
+
+local function KGCZK_fake_script() -- tps.LocalScript 
+	local script = Instance.new('LocalScript', tps)
+
+	local tps = game:GetService("TeleportService")
+	local player = game.Players.LocalPlayer
+	local id = 0
+	local uis = game:GetService("UserInputService")
+	if uis.TouchEnabled == true then
+		script.Parent.Parent:Destroy()
+	end
+	script.Parent.MouseButton1Up:Connect(function()
+		tps:Teleport(id,player)
+	end)
+end
+coroutine.wrap(KGCZK_fake_script)()
